@@ -27,11 +27,16 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -51,11 +56,12 @@ fun NotesScreen(
     id: Int,
     navController: NavController,
     modifier: Modifier = Modifier,
-    context: Context = LocalContext.current
+    context: Context = LocalContext.current,
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
 ) {
     val notesViewModel: NotesViewModel =
         viewModel(factory = ViewModelFactory.getInstance(context = context))
-    val state by notesViewModel.state.collectAsStateWithLifecycle()
+    val state by notesViewModel.state.collectAsStateWithLifecycle(lifecycleOwner = lifecycleOwner)
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = Instant.now().toEpochMilli()
     )
@@ -185,11 +191,28 @@ fun NotesContent(
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 private fun PreviewNotesScreen() {
+
+    val lifecycleOwner = remember {
+        object : LifecycleOwner {
+            private val lifecycleRegistry = LifecycleRegistry(this)
+            fun getLifecycle() = lifecycleRegistry.apply {
+                currentState = Lifecycle.State.RESUMED
+            }
+
+            override val lifecycle: Lifecycle
+                get() = getLifecycle()
+        }
+    }
+
     NotesAppTheme {
-        NotesScreen(id = 1, navController = rememberNavController())
+        NotesScreen(
+            id = 1,
+            navController = rememberNavController(),
+            lifecycleOwner = lifecycleOwner
+        )
     }
 
 }
