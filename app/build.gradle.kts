@@ -66,4 +66,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    //nabil
+    implementation ("androidx.navigation:navigation-compose:2.5.1")
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    
 }

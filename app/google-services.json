@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "301485076437",
+    "project_id": "noteapp-48cc4",
+    "storage_bucket": "noteapp-48cc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301485076437:android:161da8f464d1f61f7b575c",
+        "android_client_info": {
+          "package_name": "com.sukasrana.notesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ-1IfCHai-Y7Z5Sety72YyP9C5mK0CCk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
