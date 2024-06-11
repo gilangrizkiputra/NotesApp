@@ -2,6 +2,7 @@ package com.sukasrana.notesapp.view.auth
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -22,22 +24,29 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
+import com.sukasrana.notesapp.data.local.authLogin.Resource
+import com.sukasrana.notesapp.view.navigation.ROUTE_HOME
 import com.sukasrana.notesapp.view.navigation.ROUTE_LOGIN
 import com.sukasrana.notesapp.view.navigation.ROUTE_SIGNUP
 import com.sukasrana.notesapp.view.theme.AppTheme
 import com.sukasrana.notesapp.view.theme.spacing
+import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(navController: NavHostController) {
+fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
+    val signupFlow = viewModel?.signUpFlow?.collectAsState()
+
+
+
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
-        val (refHeader, refName, refEmail, refPassword, refButtonSignup, refTextSignup) = createRefs()
+        val (refHeader, refName, refEmail, refPassword, refButtonSignup, refTextSignup, refLoader) = createRefs()
         val spacing = MaterialTheme.spacing
 
         Box(
@@ -122,7 +131,7 @@ fun SignupScreen(navController: NavHostController) {
 
         Button(
             onClick = {
-
+                viewModel?.signup(name,email,password)
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -153,6 +162,30 @@ fun SignupScreen(navController: NavHostController) {
             color = MaterialTheme.colorScheme.onSurface
         )
 
+        signupFlow?.value?.let{
+            when(it){
+                is Resource.Failure -> {
+                    val context = LocalContext.current
+                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
+                }
+                Resource.Loading ->{
+                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader){
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    })
+                }
+                is Resource.Success ->{
+                    LaunchedEffect(Unit) {
+                        navController.navigate(ROUTE_HOME){
+                            popUpTo(ROUTE_HOME){inclusive=true}
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -160,7 +193,7 @@ fun SignupScreen(navController: NavHostController) {
 @Composable
 fun SignupScreenPreviewLight() {
     AppTheme {
-        SignupScreen(rememberNavController())
+        SignupScreen(null,rememberNavController())
     }
 }
 
@@ -168,6 +201,6 @@ fun SignupScreenPreviewLight() {
 @Composable
 fun SignupScreenPreviewDark() {
     AppTheme {
-        SignupScreen(rememberNavController())
+        SignupScreen(null,rememberNavController())
     }
 }

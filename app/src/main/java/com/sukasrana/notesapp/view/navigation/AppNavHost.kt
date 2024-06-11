@@ -10,9 +10,11 @@ import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.view.auth.LoginScreen
 import com.sukasrana.notesapp.view.auth.SignupScreen
 import com.sukasrana.notesapp.view.home.HomeScreen
+import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 @Composable
 fun AppNavHost(
+    viewModel: AuthViewModel,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = ROUTE_LOGIN
@@ -23,13 +25,13 @@ fun AppNavHost(
         startDestination = startDestination
     ) {
         composable(ROUTE_LOGIN) {
-            LoginScreen(navController)
+            LoginScreen(viewModel,navController)
         }
         composable(ROUTE_SIGNUP) {
-            SignupScreen(navController)
+            SignupScreen(viewModel,navController)
         }
         composable(ROUTE_HOME) {
-            HomeScreen(navController)
+            HomeScreen(viewModel, navController)
         }
     }
 }
