@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view
+package com.sukasrana.notesapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
