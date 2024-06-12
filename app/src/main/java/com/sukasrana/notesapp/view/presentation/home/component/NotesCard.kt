@@ -40,7 +40,6 @@ fun NotesCard(
         onClick = onItemNotesClicked,
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
             .shadow(4.dp, shape = MaterialTheme.shapes.medium),
         colors = CardDefaults.cardColors(
             containerColor = Color.White

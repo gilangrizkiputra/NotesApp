@@ -3,6 +3,7 @@ package com.sukasrana.notesapp.view.presentation.notes
 import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,10 +13,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,6 +26,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,6 +35,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,26 +68,13 @@ fun NotesScreen(
     val notesViewModel: NotesViewModel =
         viewModel(factory = ViewModelFactory.getInstance(context = context))
     val state by notesViewModel.state.collectAsStateWithLifecycle(lifecycleOwner = lifecycleOwner)
-    val datePickerState = rememberDatePickerState(
-        initialSelectedDateMillis = Instant.now().toEpochMilli()
-    )
 
     LaunchedEffect(id) {
         notesViewModel.onEvent(NotesEvent.OnGetNotesById(id))
     }
 
-    NotesDatePicker(
-        state = datePickerState,
-        isOpen = state.isDatePickerDialogOpen,
-        onDismissRequest = { notesViewModel.isDatePickerDialogClosed() },
-        onConfirmButtonClicked = {
-            notesViewModel.onEvent(NotesEvent.OnDateChange(datePickerState.selectedDateMillis))
-            notesViewModel.isDatePickerDialogClosed()
-        }
-    )
-
     NotesContent(
-        isTaskExist = state.currentNoteskId != null,
+        isNotesExist = state.currentNoteskId != null,
         onBackClick = { navController.navigateUp() },
         onDeleteClick = {
             state.currentNoteskId?.let { notesViewModel.deleteNotes(it) }
@@ -92,7 +85,6 @@ fun NotesScreen(
         description = state.description,
         onDescriptionChange = { notesViewModel.onEvent(NotesEvent.OnDescriptionChange(it)) },
         dueDate = state.dueDate,
-        isDatePickerDialogOpen = { notesViewModel.isDatePickerDialogOpen() },
         onSaveClick = {
             val notes = NotesEntity(
                 notesId = state.currentNoteskId,
@@ -101,7 +93,7 @@ fun NotesScreen(
                 dueDate = state.dueDate ?: Instant.now().toEpochMilli()
             )
 
-            if (state.title.isNotEmpty() && state.description.isNotEmpty() && state.dueDate != null) {
+            if (state.title.isNotEmpty() && state.description.isNotEmpty()) {
                 notesViewModel.saveNotes(notes)
                 navController.navigateUp()
             } else
@@ -111,9 +103,10 @@ fun NotesScreen(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotesContent(
-    isTaskExist: Boolean,
+    isNotesExist: Boolean,
     onBackClick: () -> Unit,
     onDeleteClick: () -> Unit,
     title: String,
@@ -121,16 +114,16 @@ fun NotesContent(
     description: String,
     onDescriptionChange: (String) -> Unit,
     dueDate: Long?,
-    isDatePickerDialogOpen: () -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             TopAppBarNotes(
-                isTaskExist = isTaskExist,
+                isNotesExist = isNotesExist,
                 onBackButtonClick = onBackClick,
-                onDeleteButtonClick = onDeleteClick
+                onDeleteButtonClick = onDeleteClick,
+                onSaveButtonClick = onSaveClick
             )
         },
         modifier = modifier
@@ -142,51 +135,43 @@ fun NotesContent(
                 .padding(contentPadding)
                 .padding(16.dp)
         ) {
-            OutlinedTextField(
-                value = title,
-                onValueChange = onTitleChange,
-                label = { Text(text = "Title") },
-                singleLine = true,
-                modifier = Modifier.fillMaxWidth(),
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                value = description,
-                onValueChange = onDescriptionChange,
-                label = { Text(text = "Description") },
-                modifier = Modifier.fillMaxWidth(),
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = "Due Date",
-                style = MaterialTheme.typography.bodySmall
-            )
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     text = dueDate.changeMillisToDateString(),
                     style = MaterialTheme.typography.bodyLarge
                 )
-                IconButton(onClick = isDatePickerDialogOpen) {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Select Due Date"
-                    )
-                }
             }
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = onSaveClick,
-                shape = MaterialTheme.shapes.medium,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp)
-            ) {
-                Text(text = "Save", style = MaterialTheme.typography.bodyLarge)
-            }
+            OutlinedTextField(
+                value = title,
+                onValueChange = onTitleChange,
+                label = { Text(text = "Title") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    disabledBorderColor = Color.Transparent,
+                    errorBorderColor = Color.Transparent
+                )
+            )
+            Divider(color = Color.Black, thickness = 1.dp)
+            Spacer(modifier = Modifier.padding(4.dp))
+            OutlinedTextField(
+                value = description,
+                onValueChange = onDescriptionChange,
+                label = { Text(text = "Description") },
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    unfocusedBorderColor = Color.Transparent,
+                    focusedBorderColor = Color.Transparent,
+                    disabledBorderColor = Color.Transparent,
+                    errorBorderColor = Color.Transparent
+                )
+            )
         }
     }
 }

@@ -63,16 +63,4 @@ class NotesViewModel(
             }
         }
     }
-
-    fun isDatePickerDialogOpen() = _state.update {
-        it.copy(
-            isDatePickerDialogOpen = true
-        )
-    }
-
-    fun isDatePickerDialogClosed() = _state.update {
-        it.copy(
-            isDatePickerDialogOpen = false
-        )
-    }
 }
