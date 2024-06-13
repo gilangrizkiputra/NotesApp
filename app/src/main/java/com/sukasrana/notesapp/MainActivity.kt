@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.presentation.NotesApp
+import com.sukasrana.notesapp.presentation.NotesApp
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface

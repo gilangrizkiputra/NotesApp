@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sukasrana.notesapp.di.Injection
 import com.sukasrana.notesapp.domain.repository.NotesRepository
-import com.sukasrana.notesapp.view.presentation.home.HomeViewModel
-import com.sukasrana.notesapp.view.presentation.notes.NotesViewModel
+import com.sukasrana.notesapp.presentation.home.HomeViewModel
+import com.sukasrana.notesapp.presentation.notes.NotesViewModel
 
 class ViewModelFactory private constructor(private val notesRepository: NotesRepository) :
 ViewModelProvider.NewInstanceFactory() {

@@ -1,11 +1,11 @@
-package com.sukasrana.notesapp.view.presentation.notes
+package com.sukasrana.notesapp.presentation.notes
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.sukasrana.notesapp.view.presentation.navigation.Screen
+import com.sukasrana.notesapp.presentation.navigation.Screen
 
 fun NavGraphBuilder.notesScreenRoute(navController: NavController) {
     composable(

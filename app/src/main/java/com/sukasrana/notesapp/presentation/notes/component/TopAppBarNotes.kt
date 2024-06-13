@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.notes.component
+package com.sukasrana.notesapp.presentation.notes.component
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons

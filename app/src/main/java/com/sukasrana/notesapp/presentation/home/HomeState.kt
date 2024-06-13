@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.home
+package com.sukasrana.notesapp.presentation.home
 
 import com.sukasrana.notesapp.data.local.entity.NotesEntity
 

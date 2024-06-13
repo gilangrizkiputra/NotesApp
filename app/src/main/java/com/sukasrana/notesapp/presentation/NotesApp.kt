@@ -1,10 +1,10 @@
-package com.sukasrana.notesapp.view.presentation
+package com.sukasrana.notesapp.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.sukasrana.notesapp.view.presentation.navigation.NotesNavGraph
+import com.sukasrana.notesapp.presentation.navigation.NotesNavGraph
 
 @Composable
 fun NotesApp(

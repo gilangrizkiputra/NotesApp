@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.notes
+package com.sukasrana.notesapp.presentation.notes
 
 data class NotesState(
     val title: String = "",

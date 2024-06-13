@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.notes
+package com.sukasrana.notesapp.presentation.notes
 
 sealed interface NotesEvent {
     data class OnTitleChange(val title: String): NotesEvent

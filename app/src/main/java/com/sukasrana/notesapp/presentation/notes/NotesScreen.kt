@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.notes
+package com.sukasrana.notesapp.presentation.notes
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -51,8 +51,8 @@ import com.sukasrana.notesapp.data.local.entity.NotesEntity
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
 import com.sukasrana.notesapp.utils.Converter.changeMillisToDateString
 import com.sukasrana.notesapp.utils.ViewModelFactory
-import com.sukasrana.notesapp.view.presentation.notes.component.NotesDatePicker
-import com.sukasrana.notesapp.view.presentation.notes.component.TopAppBarNotes
+import com.sukasrana.notesapp.presentation.notes.component.NotesDatePicker
+import com.sukasrana.notesapp.presentation.notes.component.TopAppBarNotes
 import java.time.Instant
 
 @SuppressLint("NewApi")

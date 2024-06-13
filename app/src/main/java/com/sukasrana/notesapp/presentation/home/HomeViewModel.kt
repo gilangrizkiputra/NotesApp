@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.home
+package com.sukasrana.notesapp.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

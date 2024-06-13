@@ -1,7 +1,10 @@
-package com.sukasrana.notesapp.view.screen.splash
+package com.sukasrana.notesapp.presentation.splash
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +14,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -20,7 +26,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.navigation.Screen
+import com.sukasrana.notesapp.presentation.navigation.Screen
 import kotlinx.coroutines.delay
 
 @Composable
@@ -44,7 +50,17 @@ fun SplashScreen(navController: NavController) {
             }
         }
     )
+    var isVisible by remember {
+        mutableStateOf(false)
+    }
 
+    LaunchedEffect(key1 = isVisible) {
+        delay(300L)
+        isVisible = true
+
+        delay(1400L)
+        isVisible = false
+    }
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -55,7 +71,13 @@ fun SplashScreen(navController: NavController) {
             modifier = Modifier
                 .background(MaterialTheme.colorScheme.background)
         ) {
-            Image(painter = painterResource(id = R.drawable.notesapp_logo), contentDescription = null)
+            AnimatedVisibility(
+                visible = isVisible,
+                enter = scaleIn(),
+                exit = scaleOut()
+            ) {
+                Image(painter = painterResource(id = R.drawable.notesapp_logo), contentDescription = null)
+            }
         }
     }
 }

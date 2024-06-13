@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.notes.component
+package com.sukasrana.notesapp.presentation.notes.component
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.DatePicker

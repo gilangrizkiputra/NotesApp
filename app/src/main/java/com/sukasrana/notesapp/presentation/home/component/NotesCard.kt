@@ -1,6 +1,6 @@
 @file:kotlin.OptIn(ExperimentalMaterial3Api::class)
 
-package com.sukasrana.notesapp.view.presentation.home.component
+package com.sukasrana.notesapp.presentation.home.component
 
 import android.widget.AdapterView.OnItemClickListener
 import androidx.compose.foundation.background

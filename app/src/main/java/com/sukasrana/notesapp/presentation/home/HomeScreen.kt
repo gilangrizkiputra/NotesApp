@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.presentation.home
+package com.sukasrana.notesapp.presentation.home
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -34,8 +34,8 @@ import com.sukasrana.notesapp.data.local.entity.NotesEntity
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
 import com.sukasrana.notesapp.utils.Converter.changeMillisToDateString
 import com.sukasrana.notesapp.utils.ViewModelFactory
-import com.sukasrana.notesapp.view.presentation.home.component.NotesCard
-import com.sukasrana.notesapp.view.presentation.navigation.Screen
+import com.sukasrana.notesapp.presentation.home.component.NotesCard
+import com.sukasrana.notesapp.presentation.navigation.Screen
 
 @Composable
 fun HomeScreen(
