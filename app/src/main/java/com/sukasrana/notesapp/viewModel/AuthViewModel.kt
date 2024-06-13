@@ -34,13 +34,13 @@ class AuthViewModel @Inject constructor(
     }
 
     fun login(email: String,password:String)=viewModelScope.launch {
-        _loginFlow.value=Resource.Loading
+
         val result = repository.login(email,password)
         _loginFlow.value=result
     }
 
     fun signup(name:String,email: String,password:String)=viewModelScope.launch {
-        _signUpFlow.value=Resource.Loading
+
         val result = repository.signup(name,email,password)
         _signUpFlow.value=result
     }

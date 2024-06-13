@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -39,9 +40,14 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
-    val signupFlow = viewModel?.signUpFlow?.collectAsState()
+    val signupFlow by viewModel?.signUpFlow?.collectAsState(initial = null) ?: remember { mutableStateOf(null) }
 
-
+    if (viewModel == null) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            Text(text = "ViewModel is null", modifier = Modifier.align(Alignment.Center))
+        }
+        return
+    }
 
     ConstraintLayout(
         modifier = Modifier.fillMaxSize()
@@ -131,7 +137,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
 
         Button(
             onClick = {
-                viewModel?.signup(name,email,password)
+                viewModel?.signup(name, email, password)
             },
             modifier = Modifier.constrainAs(refButtonSignup) {
                 top.linkTo(refPassword.bottom, spacing.large)
@@ -142,7 +148,6 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
         ) {
             Text(text = stringResource(id = R.string.signup), style = MaterialTheme.typography.titleMedium)
         }
-
 
         Text(
             modifier = Modifier
@@ -162,30 +167,22 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        signupFlow?.value?.let{
-            when(it){
+        signupFlow?.let { resource ->
+            when (resource) {
                 is Resource.Failure -> {
                     val context = LocalContext.current
-                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, resource.exception.message, Toast.LENGTH_SHORT).show()
                 }
-                Resource.Loading ->{
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader){
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
-                }
-                is Resource.Success ->{
+
+                is Resource.Success -> {
                     LaunchedEffect(Unit) {
-                        navController.navigate(ROUTE_HOME){
-                            popUpTo(ROUTE_HOME){inclusive=true}
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_LOGIN) { inclusive = true }
                         }
                     }
                 }
             }
         }
-
     }
 }
 
@@ -193,7 +190,7 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
 @Composable
 fun SignupScreenPreviewLight() {
     AppTheme {
-        SignupScreen(null,rememberNavController())
+        SignupScreen(null, rememberNavController())
     }
 }
 
@@ -201,6 +198,6 @@ fun SignupScreenPreviewLight() {
 @Composable
 fun SignupScreenPreviewDark() {
     AppTheme {
-        SignupScreen(null,rememberNavController())
+        SignupScreen(null, rememberNavController())
     }
 }

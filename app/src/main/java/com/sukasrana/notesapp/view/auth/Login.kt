@@ -143,16 +143,9 @@ fun LoginScreen(viewModel: AuthViewModel?,navController: NavController) {
             when(it){
                 is Resource.Failure -> {
                     val context = LocalContext.current
-                    Toast.makeText(context, it.exception.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, it.exception.message, Toast.LENGTH_SHORT).show()
                 }
-                Resource.Loading ->{
-                    CircularProgressIndicator(modifier = Modifier.constrainAs(refLoader){
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                    })
-                }
+
                 is Resource.Success ->{
                     LaunchedEffect(Unit) {
                         navController.navigate(ROUTE_HOME){

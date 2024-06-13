@@ -1,38 +1,41 @@
 package com.sukasrana.notesapp.data.local.authLogin
 
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.sukasrana.notesapp.data.local.authLogin.Utils.await
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
+
     override val currentUser: FirebaseUser?
         get() = firebaseAuth.currentUser
 
     override suspend fun login(email: String, password: String): Resource<FirebaseUser> {
         return try {
-            val result=firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            Resource.Success(result.user!!)
-        }catch (e: Exception){
-            e.printStackTrace()
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            Resource.Success(firebaseAuth.currentUser!!)
+        } catch (e: Exception) {
             Resource.Failure(e)
         }
-
     }
 
-    override suspend fun signup(name:String,email: String, password: String): Resource<FirebaseUser> {
+    override suspend fun signup(name: String, email: String, password: String): Resource<FirebaseUser> {
         return try {
-            val result=firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            result?.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
-            Resource.Success(result.user!!)
-        }catch (e: Exception){
-            e.printStackTrace()
+            firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+            firebaseAuth.currentUser?.let {
+                // Update the user's profile with the name
+                val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(name).build()
+                it.updateProfile(profileUpdates).await()
+            }
+            Resource.Success(firebaseAuth.currentUser!!)
+        } catch (e: Exception) {
             Resource.Failure(e)
         }
-
     }
 
     override fun logout() {

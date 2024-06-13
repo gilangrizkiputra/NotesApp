@@ -1,19 +1,30 @@
-package com.sukasrana.notesapp.di.authLogin
+package com.sukasrana.notesapp.di
 
 import com.google.firebase.auth.FirebaseAuth
+import com.sukasrana.notesapp.data.local.authLogin.AuthRepository
 import com.sukasrana.notesapp.data.local.authLogin.AuthRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
-class AppModule {
-    @Provides
-    fun provideFirebaseAuth():FirebaseAuth=FirebaseAuth.getInstance()
+@InstallIn(SingletonComponent::class)
+abstract class AuthModule {
 
-    @Provides
-    fun provideFirebaseRepository(impl: AuthRepositoryImpl):AuthRepositoryImpl=impl
+    @Binds
+    @Singleton
+    abstract fun bindAuthRepository(
+        authRepositoryImpl: AuthRepositoryImpl
+    ): AuthRepository
+
+    companion object {
+        @Provides
+        @Singleton
+        fun provideFirebaseAuth(): FirebaseAuth {
+            return FirebaseAuth.getInstance()
+        }
+    }
 }
