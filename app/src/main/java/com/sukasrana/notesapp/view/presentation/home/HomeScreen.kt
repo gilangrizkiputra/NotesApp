@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -61,6 +62,9 @@ fun HomeScreen(
         onFabClicked = {
             navController.navigate(Screen.Notes.createRoute(0))
         },
+        onListClicked = {
+                        navController.navigate(Screen.User.route)
+        },
         modifier = modifier,
     )
 }
@@ -73,6 +77,7 @@ fun HomeContent(
     isFABExpanded: Boolean,
     navController: NavController,
     onFabClicked: () -> Unit,
+    onListClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
@@ -84,6 +89,12 @@ fun HomeContent(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()
                     ) {
+                        IconButton(onClick = onListClicked) {
+                            Icon(
+                                imageVector = Icons.Default.List,
+                                contentDescription = "list Retrofit"
+                            )
+                        }
                         IconButton(
                             onClick = { /*TODO*/ },
                             modifier = Modifier.size(25.dp)

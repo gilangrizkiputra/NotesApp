@@ -5,5 +5,5 @@ data class NotesState(
     val description: String = "",
     val isDatePickerDialogOpen: Boolean = false,
     val dueDate: Long? = null,
-    val currentNoteskId: Int? = null,
+    val currentNotesId: Int? = null,
 )

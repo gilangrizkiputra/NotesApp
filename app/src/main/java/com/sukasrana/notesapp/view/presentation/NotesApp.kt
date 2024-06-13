@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.view.presentation.navigation.NotesNavGraph
 
+
 @Composable
 fun NotesApp(
     modifier: Modifier = Modifier,

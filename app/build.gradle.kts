@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.devtools.ksp")
+    id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
+
 }
 
 android {
@@ -60,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -82,4 +86,20 @@ dependencies {
     
     //splashscreen
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.12")
+
+    //injection
+    implementation ("com.google.dagger:hilt-android:2.49")
+    ksp ("com.google.dagger:hilt-android-compiler:2.49")
+    ksp("androidx.hilt:hilt-compiler:1.2.0")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    //coil
+    implementation ("io.coil-kt:coil-compose:1.4.0")
+
 }

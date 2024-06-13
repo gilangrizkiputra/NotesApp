@@ -73,11 +73,4 @@ fun NotesCard(
     }
 }
 
-//@Preview(showSystemUi = true)
-//@Composable
-//private fun PreviewNotesCard() {
-//    NotesAppTheme {
-//        NotesCard(title = "Judul", date = "27/09/24", onItemClicked = { /*TODO*/ })
-//    }
-//}
 
