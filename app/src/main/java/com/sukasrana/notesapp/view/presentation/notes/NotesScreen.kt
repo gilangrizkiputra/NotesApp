@@ -74,10 +74,10 @@ fun NotesScreen(
     }
 
     NotesContent(
-        isNotesExist = state.currentNoteskId != null,
+        isNotesExist = state.currentNotesId != null,
         onBackClick = { navController.navigateUp() },
         onDeleteClick = {
-            state.currentNoteskId?.let { notesViewModel.deleteNotes(it) }
+            state.currentNotesId?.let { notesViewModel.deleteNotes(it) }
             navController.navigateUp()
         },
         title = state.title,
@@ -87,7 +87,7 @@ fun NotesScreen(
         dueDate = state.dueDate,
         onSaveClick = {
             val notes = NotesEntity(
-                notesId = state.currentNoteskId,
+                notesId = state.currentNotesId,
                 title = state.title,
                 description = state.description,
                 dueDate = state.dueDate ?: Instant.now().toEpochMilli()

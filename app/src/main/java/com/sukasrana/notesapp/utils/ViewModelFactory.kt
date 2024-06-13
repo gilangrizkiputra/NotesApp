@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sukasrana.notesapp.di.Injection
 import com.sukasrana.notesapp.domain.repository.NotesRepository
+import com.sukasrana.notesapp.view.presentation.ListUser.ListUserViewModel
 import com.sukasrana.notesapp.view.presentation.home.HomeViewModel
 import com.sukasrana.notesapp.view.presentation.notes.NotesViewModel
 

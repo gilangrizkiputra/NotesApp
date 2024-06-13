@@ -52,13 +52,13 @@ class NotesViewModel(
     }
 
     private fun fetchNotes(notesId: Int) = viewModelScope.launch {
-        taskRepository.getNotesById(notesId).collect { task ->
+        taskRepository.getNotesById(notesId).collect { notes ->
             _state.update {
                 it.copy(
-                    currentNoteskId = task?.notesId,
-                    title = task?.title ?: "",
-                    description = task?.description ?: "",
-                    dueDate = task?.dueDate,
+                    currentNotesId = notes?.notesId,
+                    title = notes?.title ?: "",
+                    description = notes?.description ?: "",
+                    dueDate = notes?.dueDate,
                 )
             }
         }
