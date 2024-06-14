@@ -72,7 +72,7 @@ fun HomeScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                 )
 
                 Text(
-                    text = viewModel?.currentUser?.displayName ?:"",
+                    text = viewModel?.currentUser?.displayName?:"",
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier.weight(0.7f),
                     color = MaterialTheme.colorScheme.onSurface
