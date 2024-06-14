@@ -3,7 +3,7 @@
 **Fitur :**
   - Animation
   - Data Storage
-  - AlarmManager
+  - ~~AlarmManager~~
   - Room
   - Injection
   - Retrofit
