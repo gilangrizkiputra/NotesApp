@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view
+package com.sukasrana.notesapp
 
 import android.os.Bundle
 import android.util.Log
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(text = "Helo $name!", modifier = modifier)
+    Text(text = "Hello $name!", modifier = modifier)
 }
 
 @Preview(showBackground = true)
