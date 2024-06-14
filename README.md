@@ -1,6 +1,6 @@
 ## NotesApp
 
-**Feature :**
+> **Feature :**
   - Animation
   - Data Storage
   - AlarmManager
