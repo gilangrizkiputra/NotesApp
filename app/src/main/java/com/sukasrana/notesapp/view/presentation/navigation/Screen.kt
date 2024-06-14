@@ -7,4 +7,6 @@ sealed class Screen(val route: String) {
     }
     data object User: Screen("user")
     data object Maps: Screen("maps")
+
+    data object Splash : Screen("splash")
 }
