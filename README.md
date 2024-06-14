@@ -20,11 +20,11 @@ Code Google Maps `AndroidManifest.xml`:
 
 # Team
 
-| Role  | Name |  |Job
-| ------------- | ------------- |------------- |
-| SCRUM Master  | Gilang Rizki Putra  | Room, Retrofit, Google Maps |
-| Hipster  | Nabil Zerma Maulana | Firebase, Data Storage |
-| Hipster  | Lukman Adil Wibowo  | AlarmManager |
-| Hacker  | Ahmat Fauzi  | Animation, Data Storage, Injection |
+| Role          | Name                | Job                                |
+| ------------- | ------------------- |------------------------------------|
+| SCRUM Master  | Gilang Rizki Putra  | Room, Retrofit, Google Maps        |
+| Hipster       | Nabil Zerma Maulana | Firebase, Data Storage             |
+| Hipster       | Lukman Adil Wibowo  | AlarmManager                       |
+| Hacker        | Ahmat Fauzi         | Animation, Data Storage, Injection |
 
 
