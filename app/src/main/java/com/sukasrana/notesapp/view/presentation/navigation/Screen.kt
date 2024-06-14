@@ -6,4 +6,5 @@ sealed class Screen(val route: String) {
         fun createRoute(id: Int?) = "notes/$id"
     }
     data object User: Screen("user")
+    data object Maps: Screen("maps")
 }

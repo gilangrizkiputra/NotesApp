@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.sukasrana.notesapp.view.presentation.ListUser.listUserScreenRoute
 import com.sukasrana.notesapp.view.presentation.home.homeScreenRoute
+import com.sukasrana.notesapp.view.presentation.maps.mapsScreenRoute
 import com.sukasrana.notesapp.view.presentation.notes.notesScreenRoute
 
 @Composable
@@ -21,5 +22,6 @@ fun NotesNavGraph(
         homeScreenRoute(navController)
         notesScreenRoute(navController)
         listUserScreenRoute(navController)
+        mapsScreenRoute(navController)
     }
 }
