@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
@@ -65,6 +66,9 @@ fun HomeScreen(
         onListClicked = {
                         navController.navigate(Screen.User.route)
         },
+        onMapsClicked = {
+                        navController.navigate(Screen.Maps.route)
+        },
         modifier = modifier,
     )
 }
@@ -78,12 +82,19 @@ fun HomeContent(
     navController: NavController,
     onFabClicked: () -> Unit,
     onListClicked: () -> Unit,
+    onMapsClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
+                    IconButton(onClick = onMapsClicked) {
+                        Icon(
+                            imageVector = Icons.Default.LocationOn,
+                            contentDescription = "location"
+                        )
+                    }
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.End,
