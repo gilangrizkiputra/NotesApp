@@ -58,7 +58,7 @@ fun SplashScreen(navController: NavController) {
         delay(250L)
         isVisible = true
 
-        delay(1300L)
+        delay(1400L)
         isVisible = false
     }
     Surface(

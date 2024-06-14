@@ -125,7 +125,7 @@ fun HomeContent(
                                 contentDescription = "Settings"
                             )
                         }
-                        IconButton(onClick = { isVisible = true  }) {
+                        IconButton(onClick = { isVisible = !isVisible  }) {
                             Icon(
                                 imageVector = Icons.Default.Settings,
                                 contentDescription = "Settings"
@@ -182,7 +182,7 @@ fun HomeContent(
     }
     if(isVisible)
     Popup(
-        offset = IntOffset(450, 80)
+        offset = IntOffset(600, 80)
     ) {
         Box {
             Button(onClick = {
