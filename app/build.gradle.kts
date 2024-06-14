@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id ("com.google.gms.google-services")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
-
 }
 
 android {
@@ -63,7 +64,9 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.auth.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -83,7 +86,7 @@ dependencies {
     //LIfecycle
     implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    
+
     //splashscreen
     implementation("androidx.core:core-splashscreen:1.0.1")
 
@@ -110,4 +113,9 @@ dependencies {
     //koin
     implementation ("io.insert-koin:koin-android:3.4.0")
 
+    //nabil
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
 }

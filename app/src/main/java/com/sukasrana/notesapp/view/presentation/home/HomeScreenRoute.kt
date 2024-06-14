@@ -5,9 +5,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.sukasrana.notesapp.view.presentation.navigation.Screen
+import com.sukasrana.notesapp.viewModel.AuthViewModel
 
-fun NavGraphBuilder.homeScreenRoute(navController: NavController) {
+fun NavGraphBuilder.homeScreenRoute(viewModel: AuthViewModel,navController: NavController) {
     composable(route = Screen.Home.route) {
-        HomeScreen(navController)
+        HomeScreen(viewModel, navController)
     }
 }
