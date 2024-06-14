@@ -11,7 +11,8 @@
   - Firebase
   - Clean Architecture MVVM
 
-**Notes**
+**Note:**
+
 Jika ingin menggunakan Google Maps Location harus menambahkan API key di `AndroidManifest.xml`
 
 Code Google Maps `AndroidManifest.xml`:
