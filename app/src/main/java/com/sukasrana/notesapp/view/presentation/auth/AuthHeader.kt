@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.auth
+package com.sukasrana.notesapp.view.presentation.auth
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.theme.spacing
+import com.sukasrana.notesapp.view.presentation.theme.spacing
 
 
 @Composable

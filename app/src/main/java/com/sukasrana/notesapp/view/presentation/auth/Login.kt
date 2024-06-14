@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.auth
+package com.sukasrana.notesapp.view.presentation.auth
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -24,11 +24,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.data.local.authLogin.Resource
-import com.sukasrana.notesapp.view.navigation.ROUTE_HOME
-import com.sukasrana.notesapp.view.navigation.ROUTE_LOGIN
-import com.sukasrana.notesapp.view.navigation.ROUTE_SIGNUP
-import com.sukasrana.notesapp.view.theme.AppTheme
-import com.sukasrana.notesapp.view.theme.spacing
+import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_HOME
+import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_LOGIN
+import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_SIGNUP
+import com.sukasrana.notesapp.view.presentation.theme.AppTheme
+import com.sukasrana.notesapp.view.presentation.theme.spacing
 import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 

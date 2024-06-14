@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.theme
+package com.sukasrana.notesapp.view.presentation.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

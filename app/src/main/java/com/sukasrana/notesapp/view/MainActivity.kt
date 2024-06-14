@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.navigation.AppNavHost
+import com.sukasrana.notesapp.view.presentation.navigation.AppNavHost
 import com.sukasrana.notesapp.viewModel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

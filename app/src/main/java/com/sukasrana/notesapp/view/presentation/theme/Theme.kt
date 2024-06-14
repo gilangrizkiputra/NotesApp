@@ -1,14 +1,11 @@
-package com.sukasrana.notesapp.view.theme
+package com.sukasrana.notesapp.view.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.font.FontFamily
 
 
 private val LightColors = lightColorScheme(

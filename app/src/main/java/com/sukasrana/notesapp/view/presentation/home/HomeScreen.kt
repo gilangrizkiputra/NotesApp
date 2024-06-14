@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.home
+package com.sukasrana.notesapp.view.presentation.home
 
 
 import android.content.res.Configuration
@@ -17,10 +17,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
-import com.sukasrana.notesapp.view.navigation.ROUTE_HOME
-import com.sukasrana.notesapp.view.navigation.ROUTE_LOGIN
-import com.sukasrana.notesapp.view.theme.AppTheme
-import com.sukasrana.notesapp.view.theme.spacing
+import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_HOME
+import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_LOGIN
+import com.sukasrana.notesapp.view.presentation.theme.AppTheme
+import com.sukasrana.notesapp.view.presentation.theme.spacing
 import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 @Composable
