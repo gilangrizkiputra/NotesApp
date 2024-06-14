@@ -1,4 +1,4 @@
-package com.sukasrana.notesapp.view.screen.splash
+package com.sukasrana.notesapp.view.presentation.splash
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.navigation.Screen
+import com.sukasrana.notesapp.view.presentation.navigation.Screen
 import kotlinx.coroutines.delay
 
 @Composable

@@ -8,6 +8,7 @@ import com.sukasrana.notesapp.view.presentation.ListUser.listUserScreenRoute
 import com.sukasrana.notesapp.view.presentation.home.homeScreenRoute
 import com.sukasrana.notesapp.view.presentation.maps.mapsScreenRoute
 import com.sukasrana.notesapp.view.presentation.notes.notesScreenRoute
+import com.sukasrana.notesapp.view.presentation.splash.splashScreenRoute
 
 @Composable
 fun NotesNavGraph(
@@ -16,9 +17,10 @@ fun NotesNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = Screen.Splash.route,
         modifier = modifier
     ) {
+        splashScreenRoute(navController)
         homeScreenRoute(navController)
         notesScreenRoute(navController)
         listUserScreenRoute(navController)
