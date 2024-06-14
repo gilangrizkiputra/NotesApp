@@ -24,9 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.data.local.authLogin.Resource
-import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_HOME
-import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_LOGIN
-import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_SIGNUP
+import com.sukasrana.notesapp.view.presentation.navigation.Screen
 import com.sukasrana.notesapp.view.presentation.theme.AppTheme
 import com.sukasrana.notesapp.view.presentation.theme.spacing
 import com.sukasrana.notesapp.viewModel.AuthViewModel
@@ -129,8 +127,8 @@ fun LoginScreen(viewModel: AuthViewModel?,navController: NavController) {
                     end.linkTo(parent.end, spacing.extraLarge)
                 }
                 .clickable {
-                    navController.navigate(ROUTE_SIGNUP) {
-                        popUpTo(ROUTE_LOGIN) { inclusive = true }
+                    navController.navigate(Screen.SignUp.route) {
+                        popUpTo(Screen.Login.route) { inclusive = true }
                     }
                 },
             text = stringResource(id = R.string.dont_have_account),
@@ -148,8 +146,8 @@ fun LoginScreen(viewModel: AuthViewModel?,navController: NavController) {
 
                 is Resource.Success ->{
                     LaunchedEffect(Unit) {
-                        navController.navigate(ROUTE_HOME){
-                            popUpTo(ROUTE_HOME){inclusive=true}
+                        navController.navigate(Screen.Home.route){
+                            popUpTo(Screen.Home.route){inclusive=true}
                         }
                     }
                 }

@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import com.sukasrana.notesapp.ui.theme.NotesAppTheme
-import com.sukasrana.notesapp.view.presentation.navigation.AppNavHost
 import com.sukasrana.notesapp.viewModel.AuthViewModel
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,12 +27,14 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NotesAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                   NotesApp(modifier = Modifier.padding(innerPadding))
+                   NotesApp(viewModel = viewModel, modifier = Modifier.padding(innerPadding))
                 }
             }
         }

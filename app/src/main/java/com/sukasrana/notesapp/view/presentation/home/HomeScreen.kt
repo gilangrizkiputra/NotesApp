@@ -18,6 +18,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +26,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Popup
 import androidx.lifecycle.*
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -38,9 +41,11 @@ import com.sukasrana.notesapp.utils.Converter.changeMillisToDateString
 import com.sukasrana.notesapp.utils.ViewModelFactory
 import com.sukasrana.notesapp.view.presentation.home.component.NotesCard
 import com.sukasrana.notesapp.view.presentation.navigation.Screen
+import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 @Composable
 fun HomeScreen(
+    viewModel: AuthViewModel,
     navController: NavController,
     modifier: Modifier = Modifier,
     context: Context = LocalContext.current,
@@ -56,6 +61,7 @@ fun HomeScreen(
     val isFABExpanded by remember { derivedStateOf { listState.firstVisibleItemIndex == 0 } }
 
     HomeContent(
+        viewModel = viewModel,
         tasks = state.notes,
         isDarkMode = isDarkMode,
         isFABExpanded = isFABExpanded,
@@ -76,6 +82,7 @@ fun HomeScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeContent(
+    viewModel: AuthViewModel,
     tasks: List<NotesEntity>,
     isDarkMode: Boolean,
     isFABExpanded: Boolean,
@@ -85,6 +92,9 @@ fun HomeContent(
     onMapsClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isVisible by remember {
+        mutableStateOf(false)
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -115,7 +125,7 @@ fun HomeContent(
                                 contentDescription = "Settings"
                             )
                         }
-                        IconButton(onClick = { /*TODO*/ }) {
+                        IconButton(onClick = { isVisible = true  }) {
                             Icon(
                                 imageVector = Icons.Default.Settings,
                                 contentDescription = "Settings"
@@ -170,30 +180,46 @@ fun HomeContent(
                 }
             }
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-private fun PreviewHomeScreen() {
-    // Mocking a lifecycle owner for the preview
-    val lifecycleOwner = remember {
-        object : LifecycleOwner {
-            private val lifecycleRegistry = LifecycleRegistry(this)
-            fun getLifecycle() = lifecycleRegistry.apply {
-                currentState = Lifecycle.State.RESUMED
+    if(isVisible)
+    Popup(
+        offset = IntOffset(450, 80)
+    ) {
+        Box {
+            Button(onClick = {
+                viewModel?.logout()
+                navController.navigate(Screen.Login.route){
+                    popUpTo(Screen.Home.route){inclusive=true}
+                }
+            }) {
+                Text(text = "LogOut")
             }
-
-            override val lifecycle: Lifecycle
-                get() = getLifecycle()
         }
     }
-    NotesAppTheme {
-        HomeScreen(
-            navController = rememberNavController(),
-            context = LocalContext.current,
-            isDarkMode = isSystemInDarkTheme(),
-            listState = rememberLazyListState(),
-            lifecycleOwner = lifecycleOwner
-        )
-    }
 }
+
+//@Preview(showSystemUi = true)
+//@Composable
+//private fun PreviewHomeScreen() {
+    // Mocking a lifecycle owner for the preview
+    //val lifecycleOwner = remember {
+      //  object : LifecycleOwner {
+        //    private val lifecycleRegistry = LifecycleRegistry(this)
+          //  fun getLifecycle() = lifecycleRegistry.apply {
+           //     currentState = Lifecycle.State.RESUMED
+            //}
+
+//            override val lifecycle: Lifecycle
+ //               get() = getLifecycle()
+   //     }
+//    }
+  //  NotesAppTheme {
+    //    HomeScreen(
+      //      viewModel = AuthViewModel,
+        //    navController = rememberNavController(),
+          //  context = LocalContext.current,
+            //isDarkMode = isSystemInDarkTheme(),
+            //listState = rememberLazyListState(),
+            //lifecycleOwner = lifecycleOwner
+        //)
+    //}
+//}

@@ -22,19 +22,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.sukasrana.notesapp.R
 import com.sukasrana.notesapp.data.local.authLogin.Resource
-import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_LOGIN
-import com.sukasrana.notesapp.view.presentation.navigation.ROUTE_SIGNUP
+import com.sukasrana.notesapp.view.presentation.navigation.Screen
 import com.sukasrana.notesapp.view.presentation.theme.AppTheme
 import com.sukasrana.notesapp.view.presentation.theme.spacing
 import com.sukasrana.notesapp.viewModel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
+fun SignupScreen(viewModel: AuthViewModel?, navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -156,8 +155,8 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
                     end.linkTo(parent.end, spacing.extraLarge)
                 }
                 .clickable {
-                    navController.navigate(ROUTE_LOGIN) {
-                        popUpTo(ROUTE_SIGNUP) { inclusive = true }
+                    navController.navigate(Screen.Login.route) {
+                        popUpTo(Screen.SignUp.route) { inclusive = true }
                     }
                 },
             text = stringResource(id = R.string.already_have_account),
@@ -175,8 +174,8 @@ fun SignupScreen(viewModel: AuthViewModel?, navController: NavHostController) {
 
                 is Resource.Success -> {
                     LaunchedEffect(Unit) {
-                        navController.navigate(ROUTE_LOGIN) {
-                            popUpTo(ROUTE_LOGIN) { inclusive = true }
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(Screen.Login.route) { inclusive = true }
                         }
                     }
                 }
